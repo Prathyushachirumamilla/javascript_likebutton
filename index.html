@@ -8,17 +8,40 @@
     <i onclick="like()" class="fa fa-thumbs-up"><span id="likeU">0</span></i>&nbsp;&nbsp;
     <i onclick="dislike()" class="fa fa-thumbs-down"><span id="dislikeU">0</span></i>
     <script>
-        var like_v = 0;
-        var dislike_v = 0;
+        if(localStorage.getItem('likeU'))
+        {
+            document.getElementById('likeU').innerHTML=parseInt(localStorage.getItem('likeU'));
+            var like_v=parseInt(localStorage.getItem('likeU'));
+        }
+        else
+        {
+            localStorage.setItem('likeU',0);
+            var like_v=0;
+        }
+        if(localStorage.getItem('dislikeU'))
+        {
+            document.getElementById('dislikeU').innerHTML=parseInt(localStorage.getItem('dislikeU'));
+            var dislike_v=parseInt(localStorage.getItem('dislikeU'));
+        }
+        else
+        {
+            localStorage.setItem('dislikeU',0);
+            var dislike_v=0;
+        }
+
         function like()
         {
-            like_v=like_v+1;
+            //like_v=like_v+1;
+            like_v++;
             document.getElementById("likeU").innerHTML=like_v;
+            localStorage.setItem('likeU',like_v);
         }
         function dislike()
         {
-            dislike_v=dislike_v+1;
+            //dislike_v=dislike_v+1;
+            dislike_v++
             document.getElementById("dislikeU").innerHTML=dislike_v;
+            localStorage.setItem('dislikeU',dislike_v);
         }
 
         </script>

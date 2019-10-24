@@ -1,0 +1,50 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        <h1 style="background-color: black; color:wheat; text-align: center">DigitalLync Technologies</h1>
+        <!--
+        <div id="navbar">
+        <a href=login.html>Login</a> &nbsp; &nbsp; &nbsp;
+        <a href=register.html>Register</a>  &nbsp; &nbsp; &nbsp;
+        <a href=careers.html>Careers</a> &nbsp; &nbsp; &nbsp;
+        <a href=index.html>Home</a>
+        </div>
+        -->
+        <br>
+        <hr>
+        <br>
+    <form>
+
+        Username: <input type="text" id="username">
+        Password: <input type="password" id="password">
+        Email: <input type="email" id="email">
+        Mobile number: <input type="text" id="mobile_number">
+        OTP: <input type="password" id="OTP">
+        <button onclick="store()">Submit</button>
+    </form>
+
+    <script>
+        function store()
+        {
+           var inputEmail= document.getElementById("email");
+           localStorage.setItem("email", inputEmail.value);
+           var userName=document.getElementById("username");
+           localStorage.setItem("username",userName.value);
+           var password = document.getElementById("password");
+           localStorage.setItem("password",password.value);
+           var number = document.getElementById("mobile_number");
+           localStorage.setItem("mobile_number",number.value);
+           var otp = document.getElementById("OTP");
+           localStorage.setItem("OTP",number.value);
+
+            for(let i=0; i<localStorage.length; i++) 
+            {
+                let key = localStorage.key(i);
+                alert(`${key}: ${localStorage.getItem(key)}`);
+            }
+        }
+      </script>
+</body>
+</html>
