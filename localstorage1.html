@@ -1,0 +1,59 @@
+<html>
+  <body>
+    <form>
+     Enter Username:<input type="text" id="username"> <br>
+     Enter Password:<input type="password" id="password"> <br>
+     Enter MobileNumber:<input type="text" id="mobile_number"> <br>
+      <button onclick="register()">Register</button>
+    </form>
+
+    <table id="userdet_table">
+            <tr><td>Name</td><td>Password</td><td>MobileNumber</td>
+    </table>
+ 
+    <script>
+    
+      function register()
+      {
+       event.preventDefault();
+       //window.localStorage.clear();
+       var username=document.getElementById("username").value;
+       var password=document.getElementById("password").value;
+       var mobile=document.getElementById("mobile_number").value;
+ 
+          var userdata=
+          {
+            username:username,
+            password:password,
+            mobile:mobile
+          }
+           if(localStorage.getItem('userDetails') == null){ //If userDetails is null
+             localStorage.setItem('userDetails',JSON.stringify([])); // we need to initialize it with an array
+             var userDTA=JSON.parse(localStorage.getItem('userDetails')); // we need to get the local storage data to a local variable(JS Variable) to add our new data
+             console.log('userDTA', userDTA);
+              userDTA.push(userdata); // appending the data to local/JS Variable
+              var convertedJSArrayToString=  JSON.stringify(userDTA); //converting the local variable to string  so that we can pass it to local storage
+              console.log('convertedJSArrayToString',convertedJSArrayToString); 
+              localStorage.setItem('userDetails',convertedJSArrayToString); // updating the locaStorage variable with the new data
+           }
+           else
+           {
+            var userDetailsArray=JSON.parse(localStorage.getItem('userDetails'));
+                 userDetailsArray.push(userdata);
+                 console.log(userDetailsArray);
+                 localStorage.setItem('userDetails',JSON.stringify(userDetailsArray));
+           }
+            userdetails_data=JSON.parse(localStorage.getItem("userDetails"));
+            
+            //localStorage.setItem('userDetails', JSON.stringify(userdata));
+            var tab_det=document.getElementById("userdet_table");
+            tab_det.innerHTML = ""
+            for (var i = 0; i < userdetails_data.length; i++) 
+            {
+            tab_det.innerHTML += "<tr><td>" +userdetails_data[i].username + "</td><td>" +userdetails_data[i].password + "</td></tr>";
+            }
+      }
+    
+    </script>
+  </body>
+</html>
