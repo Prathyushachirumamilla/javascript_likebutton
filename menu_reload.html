@@ -1,0 +1,76 @@
+
+<html>
+<body onload = 'getLastSelectedValue()'>
+<select id = "selectX" onchange = "getSelectValue('selectX');">
+     <option>option 1</option>
+     <option>option 2</option>
+     <option>option 3</option>
+     <option>option 4</option>
+     <option>option 5</option>
+</select>
+<script>
+function getSelectValue(selectID){
+    pick_ = document.getElementById('selectX').value;
+    localStorage.setItem("lastSelectedValue", pick_); 
+    location.reload(); 
+}
+function getLastSelectedValue(){
+    var value = localStorage.getItem("lastSelectedValue")
+    if(value )
+    {
+       document.getElementById('selectX').value = value  ;
+    }
+}</script>
+</body>
+</html>
+
+<html>
+  <head>
+ 
+ 
+  </head>
+  <body>
+    
+     <form>
+       <select id="state" onchange="choice(this.value) && self.location.reload(true)">
+        <option value="" disabled selected>Select state</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="AndhraPradesh">AndhraPradesh</option>
+        <option value="TamilNadu">TamilNadu</option>
+       </select>
+       <!-- <h1 id="choice"></h1> -->
+       <select id="district" name="district">
+            <option value="" disabled selected>Dynamic Menu</option>
+        </select>
+ 
+     </form>
+ 
+       <script>
+       var districtsOfState = {
+                            Telangana:["Khammam", "Warangal", "Nizamabad","Karimnagar","Adilabad"],
+                            AndhraPradesh:["Guntur","Visakhapatnam","Nellore","Ongole","Chittor","Srikaklam"],  
+                            Karnataka: ["Bangalore","Mysuru","Ballari","Raichur","Hosapet","Chikmagalur","Gangavati"],
+                            TamilNadu: ["Chennai","Coimbatore","Salem","Vellore","Kancheepuram","Cuddalore","Kumbakonam"],
+                            Kerala: ["kochi","Kanpur"]
+                            }
+       function choice(value){
+            event.preventDefault();
+            localStorage.setItem("state_lastSelectedValue", value); 
+            location.reload();
+            var value=localStorage.getItem("state_lastSelectedValue");
+            document.getElementById("state").innerHTML.getLastSelectedValue = value;
+            if(value.length==0) 
+            document.getElementById("district").innerHTML = "<option></option>";
+            else {
+            var districtOptions = "";
+            for(districtId in districtsOfState[value]) {
+                districtOptions+="<option>"+districtsOfState[value][districtId]+"</option>";
+             }
+             document.getElementById("district").innerHTML = districtOptions;
+            }
+            }
+       </script>
+ 
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+  <head>
+ 
+ 
+  </head>
+  <body>
+    
+     <form>
+       <select id="state" onchange="choice(this.value)">
+        <option value="" disabled selected>Select state</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="AndhraPradesh">AndhraPradesh</option>
+        <option value="TamilNadu">TamilNadu</option>
+        <option value="Kerala">Kerala</option>
+       </select>
+       <!-- <h1 id="choice"></h1> -->
+       <select id="district" name="district">
+            <option value="" disabled selected>Dynamic Menu</option>
+        </select>
+ 
+     </form>
+ 
+       <script>
+       function choice(value){
+            event.preventDefault();
+            document.getElementById("district").options.length = 0;
+            switch(value)
+            {
+                case "Telangana":
+                        document.getElementById("district").options[0] = new Option("Khammam","Khammam");
+                        document.getElementById("district").options[1] = new Option("Warangal","Warangal");
+                        document.getElementById("district").options[2] = new Option("Nizamabad","Nizamabad");
+                        document.getElementById("district").options[3] = new Option("Karimnagar","Karimnagar");
+                        document.getElementById("district").options[4] = new Option("Adilabad","Adilabad");
+                        break;
+                case "AndhraPradesh" : 
+                        document.getElementById("district").options[0] = new Option("Guntur","Guntur");
+                        document.getElementById("district").options[1] = new Option("Visakhapatnam","Visakhapatnam");
+                        document.getElementById("district").options[2] = new Option("Nellore","Nellore");
+                        document.getElementById("district").options[3] = new Option("Ongole","Ongole");
+                        document.getElementById("district").options[4] = new Option("Chittor","Chittor");
+                        document.getElementById("district").options[5] = new Option("Srikakulam","Srikakulam");
+                        break;
+                case "Karnataka" : 
+                        document.getElementById("district").options[0] = new Option("Bangalore","Bangalore");
+                        document.getElementById("district").options[1] = new Option("Mysuru","Mysuru");
+                        document.getElementById("district").options[2] = new Option("Ballari","Ballari");
+                        document.getElementById("district").options[3] = new Option("Raichur","Raichur");
+                        document.getElementById("district").options[4] = new Option("Hosapet","Hosapet");
+                        document.getElementById("district").options[5] = new Option("Chikmagalur","Chikmagalur");
+                        document.getElementById("district").options[6] = new Option("Gangavati","Gangavati");
+                        break;
+                case "TamilNadu" : 
+                        document.getElementById("district").options[0] = new Option("Chennai","Chennai");
+                        document.getElementById("district").options[1] = new Option("Coimbatore","Coimbatore");
+                        document.getElementById("district").options[2] = new Option("Salem","Salem");
+                        document.getElementById("district").options[3] = new Option("Vellore","Vellore");
+                        document.getElementById("district").options[4] = new Option("Kancheepuram","Kancheepuram");
+                        document.getElementById("district").options[5] = new Option("Cuddalore","Cuddalore");
+                        document.getElementById("district").options[6] = new Option("Kumbakonam","Kumbakonam");
+                        break;
+                case "Kerala":
+                        document.getElementById("district").options[0] = new Option("Kochi","Kochi");
+                        document.getElementById("district").options[1] = new Option("Kanpur","Kanpur");
+            }
+
+            }
+       </script>
+ 
+  </body>
+</html>
