@@ -1,0 +1,84 @@
+<html>
+
+ <head>
+
+ </head>
+
+<body id="body">
+
+ <form>
+
+     Name:<input type="text" id="name">
+     Message: <input type="text" id="message">
+     <button onclick="addMessage()">AddMessage</button>
+
+ </form>
+
+    <script>
+    
+    var messages= [
+    {
+        name: "Rajesh",
+        message: "Hello! how are you!",
+        time: new Date()
+    },
+    {
+        name: "Kiran",
+        message: "Hey! how are you!",
+        time: new Date()
+    },
+    {
+        name: "ravi",
+        message: "Wassup! how are you!",
+        time: new Date()
+    },{
+        name: "anil",
+        message: "Hello! how are you!",
+        time: new Date()
+    },
+    {
+        name: "krish",
+        message: "Hello! how are you!",
+        time: new Date()
+    },
+    {
+        name: "krish",
+        message: "Hello! how are you!",
+        time: new Date()
+    }
+];
+//var i=0;
+var isULCreated=false;
+//do
+for ( var i=0;i<messages.length;i++){
+         if(isULCreated == false){
+          var body=document.getElementById('body');
+           var ul=document.createElement('ul');
+           ul.id="msgs";
+            body.appendChild(ul);
+            isULCreated=true;
+         }
+    ul.innerHTML+= "<li>" + messages[i].name +" :" + messages[i].message +"</li>"
+    //i++;
+} //while(i<messages.length);
+
+
+  function addMessage(){
+    event.preventDefault();
+    var name=document.getElementById("name").value;
+    var message=document.getElementById("message").value;
+    // var data= {
+    //   name:name,
+    //   message:message,
+    //   time: new Date()
+    // }
+    //messages.push(data);
+    ul.innerHTML+= "<li>" + name +" :" + message +"</li>";
+    console.log(ul);
+
+  }
+
+    </script>
+
+</body>
+</html>
