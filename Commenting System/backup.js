@@ -140,7 +140,7 @@ function showComments(){
     for(var i=0;i<(JSON.parse(localStorage.getItem('attempts')));i++)
     {
         // ul.innerHTML+="<li>"+localStorage.getItem((localStorage.key(i)))+"</li>";
-        if(localStorage.key(i)=='attempts')
+        if(localStorage.key(i)=='attempts' || localStorage.key(i)=='null')
         {continue;
         }
         else
