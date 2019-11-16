@@ -25,15 +25,31 @@ function addUserComment(){
   console.log("inside addcomment()");
  var username= document.getElementById('username').value;
   var comment= document.getElementById('comment').value;
- 
-  var usercomment= {
-    commentId:getUniqueId(),
-      username: username,
-      comment:comment,
-      time: showTimeAndDate(),
-      likes:0,
-      dislikes:0,
-      replies: [
+  if(username.length<5){
+
+    alert("Username should be min of 5 characters");
+
+      //return false;
+
+     }
+
+     else if(comment==null || comment==""){
+
+       alert("Comment can't be empty!");
+
+       //return false;
+
+     }
+
+     else{
+        var usercomment= {
+        commentId:getUniqueId(),
+        username: username,
+        comment:comment,
+        time: showTimeAndDate(),
+        likes:0,
+        dislikes:0,
+        replies: [
         // {userename: username,
         // comment: comment}
       ]
@@ -61,7 +77,7 @@ function addUserComment(){
     showComments();
     document.getElementById('username').value='';
  document.getElementById('comment').value='';
- 
+  }
   }
 }
 function getUniqueId(){
@@ -94,7 +110,8 @@ function showComments(){
  
      if(allComments!= null){
  
-    for(var i=0;i<allComments.length;i++){
+    for(var i=0;i<allComments.length;i++)
+    {  
       if(allComments[i].replies.length > 0)
         {
           var data=JSON.stringify(allComments[i].replies);
@@ -105,8 +122,16 @@ function showComments(){
              + "</li>" + "<button onclick=edit("+allComments[i].commentId+")>Edit</button>"+"      "+ 
              "<button onclick=deleteComment("+allComments[i].commentId+")>Delete</button>" + "    " +
              "<i class='fa fa-thumbs-up' style='font-size:18px;color:red' onclick=like("+allComments[i].commentId+")></i>"
-             + allComments[i].likes + "<i class='fa fa-thumbs-down' style='font-size:18px;color:red' onclick=dislike("+allComments[i].commentId+")></i>" + allComments[i].dislikes + " " +  "<button onclick=reply("+allComments[i].commentId+")>Reply</button>" 
-             + "<ul>" +allComments[i].replies[i].username+"</ul>";
+             + allComments[i].likes + "<i class='fa fa-thumbs-down' style='font-size:18px;color:red' onclick=dislike("+allComments[i].commentId+")></i>" + allComments[i].dislikes + " " +  "<button onclick=reply("+allComments[i].commentId+")>Reply</button>";
+             //+ "<ul>" +allComments[i].replies[j].username+"</ul>";
+             var j=allComments[i].replies.length;
+              var p=0;
+
+             while(p<j)
+             {
+               ul.innerHTML+="<ul>"+allComments[i].replies[p].username+" "+allComments[i].replies[p].comment+" "+allComments[i].replies[p].time+"</ul>"
+               p++
+             }
         }
       else
         {
@@ -116,7 +141,7 @@ function showComments(){
           "<i class='fa fa-thumbs-up' style='font-size:18px;color:red' onclick=like("+allComments[i].commentId+")></i>"
           + allComments[i].likes + "<i class='fa fa-thumbs-down' style='font-size:18px;color:red' onclick=dislike("+allComments[i].commentId+")></i>" + allComments[i].dislikes + " " +  "<button onclick=reply("+allComments[i].commentId+")>Reply</button>" ;
         }
-      }
+    }
   }
   else
   {
@@ -125,23 +150,28 @@ function showComments(){
 }
  
 function reply(commentId){
- event.preventDefault();
+ //event.preventDefault(); //Only after page refresh the ID is  being taken hence commenting this out
+ console.log(commentId);
  console.log("inside reply");
  makeInvisible('addComment');
  if(document.getElementById('reply') == null){
   var button=document.createElement('button');
   button.innerHTML="Reply to Comment";
   button.setAttribute('onclick',"replyComment("+commentId+")");
+  console.log(commentId);
   button.id="reply";
   form.appendChild(button);
  }
+ //makeVisible('reply');
  else{
    makeVisible('reply');
- }
+  //  replyComment(commentId);
+  } 
 }
  
 function replyComment(commentId){
-  event.preventDefault();
+  //event.preventDefault();// To get the page refresh this is being commented out.
+  console.log('ReplyComment'+commentId);
   var username=document.getElementById('username').value;
 var comment=document.getElementById('comment').value;
 var replyComment= {
