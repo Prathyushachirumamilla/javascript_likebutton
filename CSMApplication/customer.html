@@ -1,0 +1,172 @@
+Welcome, <span id="cname"></span> <br><br>
+
+<a href="#" onclick="updateData()">Update Profile</a>
+<!-- <a href="profileData.html" >Update Profile</a> -->
+<a href="myworkplace.html">My Workplace</a>
+<a href="available.html">Available Workplaces</a>
+<form id="form"></form>
+
+
+
+
+
+<script>
+    var companyName=localStorage.getItem('currentCompany');
+    document.getElementById('cname').innerHTML=companyName;
+
+function updateData()
+{
+    console.log('entered into updateData');
+    var companyName=localStorage.getItem('currentCompany');
+    
+    var users = JSON.parse(localStorage.getItem('users'));
+    if(users!=null)
+    {
+        console.log('Entered into users loop');
+    for (var i=0;i < users.length;i++)
+    {
+        if(users[i].company_name == companyName)
+        {
+            console.log('Entered into data loop1');
+            var data = users[i];
+            break;
+        }
+    }
+    if(data.company_name!=null)
+    {
+        
+        console.log('Entered into data loop2');
+        //var f = document.createElement("form");
+        //f.setAttribute('action',submit());
+        var br1 = document.createElement("br");
+        var f = document.getElementById('form');
+        f.appendChild(document.createElement("br"));
+        f.appendChild(document.createElement("br"));
+        f.appendChild(document.createTextNode("Company Name: "));
+        var input_cn=document.createElement("input");
+        // input_cn.type="text";
+        // input_cn.id="company_name";
+        input_cn.setAttribute("type","text");
+        input_cn.setAttribute("id","company_name");
+        input_cn.setAttribute("value", data.company_name);
+        f.appendChild(input_cn);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(document.createElement("br"));
+
+        f.appendChild(document.createTextNode("Password: "));
+        var input_pass=document.createElement("input");
+        // input_cn.type="text";
+        // input_cn.id="company_name";
+        input_pass.setAttribute("type","password");
+        input_pass.setAttribute("id","password");
+        input_pass.setAttribute("value", data.password);
+        f.appendChild(input_pass);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(document.createElement("br"));
+
+        f.appendChild(document.createTextNode("Mobile No. : "));
+        var input_mno=document.createElement("input");
+        // input_cn.type="text";
+        // input_cn.id="company_name";
+        input_mno.setAttribute("type","text");
+        input_mno.setAttribute("id","mobile_number");
+        input_mno.setAttribute("value", data.mobile_number);
+        f.appendChild(input_mno);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(document.createElement("br"));
+        //container.appendChild(document.createElement("br"));
+
+
+        f.appendChild(document.createTextNode("Email: "));
+        var input_mail=document.createElement("input");
+        // input_cn.type="text";
+        // input_cn.id="company_name";
+        input_mail.setAttribute("type","email");
+        input_mail.setAttribute("id","email");
+        input_mail.setAttribute("value", data.email);
+        f.appendChild(input_mail);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(document.createElement("br"));
+
+        /* var button = document.createElement("button");
+        button.setAttribute("onclick",update());
+        button.setAttribute("Value","Submit");
+        f.appendChild(button); */
+
+        var button=document.createElement('button');
+        button.innerHTML="Update Details";
+        //button.setAttribute('onclick',"update("+companyName+")");
+        button.setAttribute('onclick',"update()");
+        button.id="updatedetails";
+        f.appendChild(button);
+
+        /* <form>
+            Company Name: <input type="text" id="company_name"></input></br></br>
+            Password: <input type="password" id="password"></input></br></br>
+            Re-enter Password: <input type="password" id="confirm_password"></input></br></br>
+            Mobile number: <input type="text" id="mobile_number"></input></br></br>
+            Email: <input type="email" id="email"></input></br></br>
+            <button onclick="store()">Submit</button>
+        </form> */
+    }
+}
+    
+}
+function update()
+{
+    
+    var company_name=document.getElementById('company_name').value;
+    var password=document.getElementById('password').value;
+    var mobile_no=document.getElementById('mobile_number').value;
+    var email=document.getElementById('email').value;
+    var data=JSON.parse(localStorage.getItem('users'));
+    var flag1=0;
+    for ( var i=0;i<data.length;i++)
+    {
+        if(data[i].company_name == company_name)
+        {
+            data[i].mobile_number=mobile_no;
+            data[i].password=password;
+            data[i].email=email;
+            //flag1=1;
+            break;
+        }
+    }
+    //if(flag1==1)
+    //{
+        localStorage.setItem('users',JSON.stringify(data));
+        alert("Details updated successfully!");
+        //makeInvisible(form);
+        document.getElementById("form").style.display="none";
+    //}
+}
+/* function makeInvisible(id)
+{
+    event.preventDefault();
+    document.getElementById("id").style.display="none";
+} */
+
+// document.getElementById('cname').innerHTML=companyName;
+
+
+</script>
+
+/*
+
+Algorithm:
+
+profileData.html: 
+
+script -> 
+
+
+var usersData=localStorage.getItem('users');
+
+// find the company details from userData array and store it in a variable 
+
+// update the form with the company data 
+
+// once the user submits the form, go and update local storage.
+
+
+*/
