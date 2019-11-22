@@ -1,0 +1,26 @@
+<html>
+    <body>
+       
+           Account Number:<input oncopy="return oncopyMessage()" onpaste="return showMessage()" type="text" id="username">  <span id="message" style="color:red"></span>  
+            <p id="message"></p>
+            <button  id="btn">Submit</button>
+            <p id="data"></p>
+       
+           <script>
+ 
+                   function showMessage(){
+                       event.preventDefault();
+                        document.getElementById('message').innerHTML="you cannot paste your account number, please enter";
+                       return false;
+                   }
+                    function oncopyMessage(){
+                        event.preventDefault();
+                        document.getElementById('message').innerHTML="you cannot copy your account number";
+                       return false;
+                    }
+                
+                
+           </script>
+
+    </body>
+</html>

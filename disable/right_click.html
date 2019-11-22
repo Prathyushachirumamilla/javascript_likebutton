@@ -1,0 +1,36 @@
+<html>
+    <body onmousedown="return disablerightclick()">
+       
+            <p id="content">Right click here</p>
+            <span id="message" style="color:red"></span>  
+
+           <script>
+            //document.onmousedown=disableclick;
+            
+            function disablerightclick(e)
+            {
+                if(event.button==2)
+                {
+                    status="Right Click Disabled";
+                    alert(status);
+                    document.getElementById('message').innerHTML='Right click is disabled';
+                    return false;	
+                }
+                /* else if(event.button==1)
+                {
+                    status="Left Click Disabled";
+                    alert(status);
+                    document.getElementById('message').innerHTML='left click is disabled';
+                    return false;	
+                }
+                else if (event.button == 8)
+                {
+                    status="Browser back button is disabled";
+                    alert(status);
+                    document.getElementById('message').innerHTML='Browser back button is disabled';
+                    return false;	
+                } */
+            }
+            </script>
+    </body>
+</html>
