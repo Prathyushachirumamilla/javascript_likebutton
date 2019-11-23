@@ -6,10 +6,10 @@
         <button><a href="login.html">Login</a></button>&nbsp;&nbsp;&nbsp;<button><a href="register.html">Register</a></button></br></br>
         Enter Details</br></br>
         
-        <form>
+        <form id="form">
 
             Company Name<input type="text" id="companyName"> <br>
-
+            Password<input type="password" id="password"><br>
             User Type: <select id="user_type">
                     <option selected disabled>Choose Type</option>
                     <option value="admin">Admin</option>
@@ -25,36 +25,107 @@
            event.preventDefault();
            var userType=document.getElementById('user_type').value;
            var companyName=document.getElementById('companyName').value;
+           var password=document.getElementById('password').value;
+           console.log(password);
            var flag1=0;
             
            var users=JSON.parse(localStorage.getItem('users'));
-           for(var i=0;i<users.length;i++)
+           if(userType=="" || companyName=="" || password=="")
            {
-               if(users[i].company_name==companyName)
-               {
-                   flag1=1;
-                   break;
-               }
+               alert('All fields are mandatory.Please dont leave anything empty');
            }
-           if(flag1==1)
+           else
            {
-                if (userType === "admin")
+                for(var i=0;i<users.length;i++)
                 {
-                    alert("admin");
-                    location.href="admin.html";
+                    if(users[i].company_name==companyName)
+                    {
+                        flag1=1;
+                        if(users[i].password==password)
+                        {
+                            flag1=2;
+                            break;
+                        }
+                   
+                    }
                 }
-                if(userType === "customer")
+                if(flag1==2)
                 {
-                    // check whether the company name is registered or not!!
-                    localStorage.setItem('currentCompany',companyName);
-                    location.href="customer.html";
+                    if (userType === "admin")
+                    {
+                        alert("admin");
+                        location.href="admin.html";
+                    }
+                    if(userType === "customer")
+                    {
+                        // check whether the company name is registered or not!!
+                        localStorage.setItem('currentCompany',companyName);
+                        location.href="customer.html";
+                    }
                 }
-         }
-         else
-         {
-            alert("company with name "+companyName+" doesnt exist! Plese register it");
-            location.href="register.html"
-         }
+                else if (flag1==1)
+                {
+                    alert("Please try with valid credentials");
+                    var form1 = document.getElementById("form");
+                    if(document.getElementById('forgotpwd')==null)
+                    {
+                        var button=document.createElement('button');
+                        button.innerHTML="Forgot Password";
+                        console.log("data "+button.setAttribute('onclick',"forgotpass("+companyName+")"));
+                        console.log(companyName);
+                        button.id="forgotpwd";
+                        form1.appendChild(button);
+                        /* var button=document.createElement('button');
+                        button.setAttribute('onclick',"forgotpass("+companyName+")");
+                        // button.setAttribute('id',"forgotpwd");
+                        button.id="forgotpwd";
+                        //button.setAttribute('value','Forgot Password');
+                        button.innerHTML="Forgot Password";
+                        form1.appendChild(button); */
+                    }
+                    else{
+                        makeVisible('forgotpwd');
+                    }
+                
+                }
+                else 
+                {
+                    alert("company with name "+companyName+" doesnt exist! Plese register it");
+                    location.href="register.html"
+                }
+            }
+        }
+
+        function makeVisible(value)
+        {
+
+        }
+
+        function forgotpass(name)
+        {
+            //event.preventDefault();
+            console.log(name);
+            var companyName=name;
+            var users=JSON.parse(localStorage.getItem('users'));
+            for(var i=0;i<users.length;i++)
+            {
+                if(users[i].company_name==companyName)
+                {
+                    form=document.getElementById("form");
+                    if(document.getElementById('message')==null)
+                    {
+                        var element=document.createElement("span");
+                        element.setAttribute('id',"message");
+                        form.appendChild(element);
+                    }
+                    element.innerHTML=users[i].password;
+                }
+                else
+                {
+                    alert('company with name '+companyName+' doesnt exist, Please register if required!')
+                }
+            }
+
         }
         
         </script>
