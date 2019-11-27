@@ -18,6 +18,8 @@
             <button onclick="login()">Submit</button>
         </form>
 
+        <p id="message"></p>
+
         <script>
         
          function login(){
@@ -27,7 +29,7 @@
            var companyName=document.getElementById('companyName').value;
            var password=document.getElementById('password').value;
            console.log(password);
-           var flag1=0;
+           var temp1=0;
             
            var users=JSON.parse(localStorage.getItem('users'));
            if(userType=="" || companyName=="" || password=="")
@@ -40,16 +42,16 @@
                 {
                     if(users[i].company_name==companyName)
                     {
-                        flag1=1;
+                        temp1=1;
                         if(users[i].password==password)
                         {
-                            flag1=2;
+                            temp1=2;
                             break;
                         }
                    
                     }
                 }
-                if(flag1==2)
+                if(temp1==2)
                 {
                     if (userType === "admin")
                     {
@@ -63,18 +65,18 @@
                         location.href="customer.html";
                     }
                 }
-                else if (flag1==1)
+                else if (temp1==1)
                 {
                     alert("Please try with valid credentials");
-                    var form1 = document.getElementById("form");
+                    var form = document.getElementById("form");
                     if(document.getElementById('forgotpwd')==null)
                     {
                         var button=document.createElement('button');
                         button.innerHTML="Forgot Password";
-                        console.log("data "+button.setAttribute('onclick',"forgotpass("+companyName+")"));
-                        console.log(companyName);
+                        button.setAttribute('onclick',"forgotPass()");
+                        console.log("nextline" +companyName);
                         button.id="forgotpwd";
-                        form1.appendChild(button);
+                        form.appendChild(button);
                         /* var button=document.createElement('button');
                         button.setAttribute('onclick',"forgotpass("+companyName+")");
                         // button.setAttribute('id',"forgotpwd");
@@ -83,7 +85,8 @@
                         button.innerHTML="Forgot Password";
                         form1.appendChild(button); */
                     }
-                    else{
+                    else
+                    {
                         makeVisible('forgotpwd');
                     }
                 
@@ -96,21 +99,32 @@
             }
         }
 
-        function makeVisible(value)
+        function makeVisible(id)
         {
-
+            document.getElementById(id).style.display="inline";
         }
 
-        function forgotpass(name)
+        function makeInvisible(id)
         {
-            //event.preventDefault();
-            console.log(name);
-            var companyName=name;
+            document.getElementById(id).style.display="none";
+        }
+
+        function forgotPass()
+        {
+            event.preventDefault();
+            //console.log(name);
+            //var companyName=name;
+            //console.log(JSON.parse(localStorage.getItem('currentCompany')));
+            var companyName=localStorage.getItem('currentCompany');
+            console.log(companyName);
             var users=JSON.parse(localStorage.getItem('users'));
+            var para=document.getElementById('message');
+            var temp=0;
             for(var i=0;i<users.length;i++)
             {
                 if(users[i].company_name==companyName)
                 {
+                    temp=1;
                     form=document.getElementById("form");
                     if(document.getElementById('message')==null)
                     {
@@ -118,13 +132,16 @@
                         element.setAttribute('id',"message");
                         form.appendChild(element);
                     }
-                    element.innerHTML=users[i].password;
+                    message.innerHTML="Your Password to login is : "+users[i].password;
+                    makeInvisible('forgotpwd');
                 }
-                else
-                {
-                    alert('company with name '+companyName+' doesnt exist, Please register if required!')
-                }
+                
             }
+            if(temp==0)
+            {
+                alert('company with name '+companyName+' doesnt exist, Please register if required!')
+            }
+            makeInvisible('forgotpwd');
 
         }
         
